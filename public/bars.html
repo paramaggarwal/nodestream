@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+  <link rel="shortcut icon" href="/favicon.ico"/>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <title>Realtime Log Visualization</title>
+  <style>
+
+  .bar {
+    margin-bottom: 1px;
+    height: 2px;
+    transition: width 1s;
+  }
+
+  </style>
+</head>
+<body>
+  
+<script type="text/javascript">
+
+var socket = io.connect('/');
+
+var color = d3.scale.linear()
+  .domain([0, 10, 100])
+  .range(['red', 'yellow', 'green']);
+
+var width = d3.scale.linear()
+  .domain([0,100])
+  .range(['0px','500px']);
+
+socket.on('line', function (data) {
+  var nums = data.split('\t');
+  console.log(nums);
+  renderChart(nums);
+});
+
+function renderChart(nums) {
+  var bars = d3.select('body').selectAll('div').data(nums);
+  
+  bars.enter()
+    .append('div')
+    .attr('class', 'bar')
+    .style('width', width)
+    .style('background-color', color)
+
+  bars
+    .style('width', width)
+    .style('background-color', color);
+
+}
+
+</script>
+
+</body>
+</html>
+

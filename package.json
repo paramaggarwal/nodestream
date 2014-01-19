@@ -1,0 +1,18 @@
+{
+  "author": "",
+  "name": "nodestream",
+  "version": "0.0.0",
+  "repository": {
+    "url": ""
+  },
+  "dependencies": {
+    "tail": "~0.3.1",
+    "express": "~3.4.0",
+    "socket.io": "~0.9.16"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
